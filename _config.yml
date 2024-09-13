@@ -1,0 +1,21 @@
+exclude:
+  - node_modules
+  - script
+
+sass:
+  style: :compressed
+
+theme: jekyll-theme-primer
+
+title: Introduction to Manipulation Notes
+description: Bookmark this to keep an eye on updates!
+
+plugins:
+  - jekyll-relative-links
+relative_links:
+  enabled: true
+  collections: true
+markdown: kramdown
+kramdown:
+  math-engine: mathjax
+  syntax_highlighter: rouge
