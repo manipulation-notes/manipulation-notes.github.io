@@ -27,8 +27,8 @@ math: true
         - Grasp Matrix
         - ...
 2. Planning and Controls for Rigid-Body Interaction
-    1. [Introduction](planning-control/preliminaries.md)
-    2. [Dynamical Motion Primitives](planning-control/dmps.md)
+    1. [Introduction](planning-controls/preliminaries.md)
+    2. [Dynamical Motion Primitives](planning-controls/dmps.md)
 3. Perception for Rigid-Body Frictional Interactions
 
 
