@@ -122,8 +122,8 @@ distance function $\psi_i(\mathbf{q}, \mathbf{q}_c)$ for $i=1, ..., N$, where $\
 the object configuration and $\mathbf{q}_c$ denotes the configuration of the fingers. Together, these 
 configurations specify the distance to contact for each contact point $i$. $\psi_i > 0$ implies separation, 
 $\psi_i < 0$ implies penetration, and $\psi_i = 0$ implies contact. Let's assume all $N$ contacts are 
-active; i.e. that $\psi_i=0$ for all $i$. Fig.~\ref{fig:chap1:gap} illustrates the distance functions 
-for the grasp depicted in in Fig.~\ref{fig:chap1:canon}.
+active; i.e. that $\psi_i=0$ for all $i$. Fig. 3 illustrates the distance functions 
+for the grasp depicted in Fig. 2.
 
 <figure>
 <p align="center">
@@ -146,9 +146,21 @@ where the expression is to be evaluated element-wise. Intuitively, if any infini
 to the configuration of the object results in separation without penetration, then form-closure is 
 violated. Conversely, we cannot find any infinitesimal perturbation to the configuration of the object 
 that does not violate the non-penetration constraint. While this constraint provides an effective definition 
-for form closure, we cannot use it in its current form.
+for form closure, we cannot use it in its current form. The reason why we cannot use the constraints
+as they are is that it would require us to check them for all possible $d\mathbf{q}$. Since this change in
+configuration vector lives in $\mathbb{SO}(2)$ or $\mathbb{SO}(3)$, there is no way to do this. You'd have to
+sample every single change in configuration vector, and there are infinitely many of them. 
 
-A first order approximation to the definition of form closure is:
+You may be tempted to discretize and check at the discretization points, hoping that if the check holds at these
+points, then it should hold for points in between. This check not only has that big assumption we'd be
+worried about making, it would also be very expensive due to both the number of times we'd have to 
+perform it (once per discretization point which is high-dimensional) and that it involves a collision
+check that can itself be very expensive (more on collision checking later in the notes).
+
+An alternative approach is to think about the local change in contact point positions for an infinitesimal
+change in the object configuration. More specifically, we can look at the gradient of the distance functions
+as a function of the change in object configuration. This is a local approximation, specifically a first order
+approximation that we can write in the form of:
 
 $$
 \begin{align*}
@@ -156,14 +168,16 @@ $$
 \end{align*}
 $$
 
-Intuitively, this is just like the first term in the Taylor expansion approximation of the derivative 
-definition we have for the form closure. The interpretation is the same as before; however, to a first 
-order approximation of perturbation. We will now relate the first order approximation to the grasp matrix. 
+This first order approaximation of the form closure should look like the first term in the Taylor expansion 
+approximation of the form closure expression. The interpretation is the same as before; however, to a first 
+order approximation of perturbation. By itself, this approximation has not really fixed anything,
+we are still left with the original problem. However, the key insight is that we can relate the approximation 
+to the grasp matrix. 
 
-Since $\mathbf{\psi}$ is the distance function, it's gradient is the normal vector of the contact frames 
-at each contact point. We know that the grasp matrix is composed of the set of normal and tangential 
-components of contact frames. Let's denote the grasp matrix composed of only the normal contact 
-vectors as $\mathrm{G}_n$. The condition above can equivalently be written as:
+To see how, first we note that since $\mathbf{\psi}$ is the distance function, it's gradient is along the 
+normal vectors of the contact frames at each contact point. We know that the grasp matrix is composed 
+of the set of normal and tangential components of contact frames. Let's denote the grasp matrix composed 
+of only the normal contact vectors as $\mathrm{G}_n$. The condition above can equivalently be written as:
 
 $$
 \begin{align*}
@@ -171,8 +185,16 @@ $$
 \end{align*}
 $$
 
-where $\mathbf{v}$ denotes the instantaneous object velocity. This implication simply means 
-that there is no set of object velocities that would lead to separation at any contact point. 
+where $\mathbf{v}$ denotes the instantaneous object velocity. To convince yourself of the equivalence, consider
+that:
+
+$$
+  \mathrm{G}^T_n = \frac{\partial \mathbf{\psi}}{\partial \mathbf{q}}
+$$
+
+Due to the definition of the distance function and the grasp matrix and that $\mathbf{v} = \frac{\mathbf{q}}{dt}$.
+This means by simply dividing the original constraint by $dt$, we arrive at the equivalent velocity one. The implication 
+in the constraint simply means that there is no set of object velocities that would lead to separation at any contact point. 
 An equivalent formulation of this implication can be written for the set of contact forces 
 applied to the object. Let's denote the magnitude of the normal component of the contact force 
 as $\mathbf{f}_{n}$, then a grasp has first order form closure iff:
@@ -201,12 +223,17 @@ $$
 \end{align*}
 $$
 
-This condition means that there exists a set of strictly compressive normal contact forces in the 
+These conditions means that there exists a set of strictly compressive normal contact forces in the 
 null space of $\mathrm{G}_n$. This also means that we can squeeze the object as tightly as we'd 
-like while maintaining equilibrium (at no point will the object leave the grasp). For the above 
-conditions to hold, Somov 1897 proved that at least 7 contacts are necessary for a 6 degree of 
-freedom object and 4 are required for the planar case. Fig.~\ref{fig:chap1:form-example} shows 
-some example form closures in the plane (with 4 points of contact).
+like while maintaining equilibrium (at no point will the object leave the grasp). If there were a
+combination of squeezing forces for which equilibrium did not hold, then the object would accelerate.
+Similarly, if we chose an external force along that direction, the object would leave the grasp. The 
+search problem is now checking these conditions for all choices of $\mathbf{f}_n$. The first is a simple
+linear equality constraint, and the second is a linear strict inequality constraint. These checks are very
+easy to do with linear programs as we'll see in the next subsection.
+
+In general, for the above conditions to hold, Somov 1897 proved that at least 7 contacts are necessary for a 6 degree of 
+freedom object and 4 are required for the planar case. Fig. 4 shows some example form closures in the plane (with 4 points of contact).
 
 <figure>
 <p align="center">
@@ -219,7 +246,7 @@ some example form closures in the plane (with 4 points of contact).
 
 
 Geometrically, we can describe form closure using the composite friction cones we discussed in the 
-previous sections. This idea is illustrated in Fig.~\ref{fig:chap1:form-geom}.
+previous sections. This idea is illustrated in Fig. 5.
 
 <figure>
 <p align="center">
@@ -248,7 +275,7 @@ Let's denote the smallest component of $\mathbf{f}_n$ as $d$. If we can find $d>
 imply that $\mathbf{f}_n >0$. We can do this with the following linear program:
 
 $$
-\begin{algin}
+\begin{align}
     \textbf{LP1:} \quad \quad &  \text{maximize} \quad \quad & d &  \\
                               & \text{s.t.}  & \mathrm{G}_n \mathbf{f}_n &= 0 \\
                               &  & \mathrm{I} \mathbf{f}_n - \mathbf{1}d &\geq 0 \\
