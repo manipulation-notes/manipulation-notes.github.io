@@ -108,9 +108,20 @@ rigorous mathematical framework for grasp analysis.
 
 ## Grasp Analysis - Form Closure
 
-With the grasp matrix in hand, we are now staged to begin our discussion on useful types of grasps. We will begin with the notion of form closure. Intuitively, if the grasped object is in form closure then it is fully geometrically immobilized by the set contacts. We cannot perturb the object's configuration without violating any contact constraints; i.e. non-penetration. This simply means that any change in the configuration of the object with respect to the robot would lead to penetration of the object and is therefore impossible. This intuitive explanation is precisely how we write down and solve for form closure.
+With the grasp matrix in hand, we are now staged to begin our discussion on useful types of grasps. 
+We will begin with the notion of form closure. Intuitively, if the grasped object is in form closure 
+then it is fully geometrically immobilized by the set contacts. We cannot perturb the object's 
+configuration without violating any contact constraints; i.e. non-penetration. This simply means 
+that any change in the configuration of the object with respect to the robot would lead to penetration of the object and is therefore impossible. This intuitive explanation is precisely how we write down and solve for form closure.
 
-As in the previous subsection, let's assume that there are a total of $N$ frictional contacts, each applying a force $\mathbf{f}_i$ at contact points $i=1, ..., N$. For each contact point, we define a distance function $\psi_i(\mathbf{q}, \mathbf{q}_c)$ for $i=1, ..., N$, where $\mathbf{q}$ denotes the object configuration and $\mathbf{q}_c$ denotes the configuration of the fingers. Together, these configurations specify the distance to contact for each contact point $i$. $\psi_i > 0$ implies separation, $\psi_i < 0$ implies penetration, and $\psi_i = 0$ implies contact. Let's assume all $N$ contacts are active; i.e. that $\psi_i=0$ for all $i$. Fig.~\ref{fig:chap1:gap} illustrates the distance functions for the grasp depicted in in Fig.~\ref{fig:chap1:canon}.
+As in the previous subsection, let's assume that there are a total of $N$ frictional contacts, each 
+applying a force $\mathbf{f}_i$ at contact points $i=1, ..., N$. For each contact point, we define a 
+distance function $\psi_i(\mathbf{q}, \mathbf{q}_c)$ for $i=1, ..., N$, where $\mathbf{q}$ denotes 
+the object configuration and $\mathbf{q}_c$ denotes the configuration of the fingers. Together, these 
+configurations specify the distance to contact for each contact point $i$. $\psi_i > 0$ implies separation, 
+$\psi_i < 0$ implies penetration, and $\psi_i = 0$ implies contact. Let's assume all $N$ contacts are 
+active; i.e. that $\psi_i=0$ for all $i$. Fig.~\ref{fig:chap1:gap} illustrates the distance functions 
+for the grasp depicted in in Fig.~\ref{fig:chap1:canon}.
 
 <figure>
 <p align="center">
@@ -129,7 +140,11 @@ $$
 \end{align*}
 $$
 
-where the expression is to be evaluated element-wise. Intuitively, if any infinitesimal perturbation to the configuration of the object results in separation without penetration, then form-closure is violated. Conversely, we cannot find any infinitesimal perturbation to the configuration of the object that does not violate the non-penetration constraint. While this constraint provides an effective definition for form closure, we cannot use it in its current form.
+where the expression is to be evaluated element-wise. Intuitively, if any infinitesimal perturbation 
+to the configuration of the object results in separation without penetration, then form-closure is 
+violated. Conversely, we cannot find any infinitesimal perturbation to the configuration of the object 
+that does not violate the non-penetration constraint. While this constraint provides an effective definition 
+for form closure, we cannot use it in its current form.
 
 A first order approximation to the definition of form closure is:
 
@@ -139,9 +154,14 @@ $$
 \end{align*}
 $$
 
-Intuitively, this is just like the first term in the Taylor expansion approximation of the derivative definition we have for the form closure. The interpretation is the same as before; however, to a first order approximation of perturbation. We will now relate the first order approximation to the grasp matrix. 
+Intuitively, this is just like the first term in the Taylor expansion approximation of the derivative 
+definition we have for the form closure. The interpretation is the same as before; however, to a first 
+order approximation of perturbation. We will now relate the first order approximation to the grasp matrix. 
 
-Since $\mathbf{\psi}$ is the distance function, it's gradient is the normal vector of the contact frames at each contact point. We know that the grasp matrix is composed of the set of normal and tangential components of contact frames. Let's denote the grasp matrix composed of only the normal contact vectors as $\mathrm{G}_n$. The condition above can equivalently be written as:
+Since $\mathbf{\psi}$ is the distance function, it's gradient is the normal vector of the contact frames 
+at each contact point. We know that the grasp matrix is composed of the set of normal and tangential 
+components of contact frames. Let's denote the grasp matrix composed of only the normal contact 
+vectors as $\mathrm{G}_n$. The condition above can equivalently be written as:
 
 $$
 \begin{align*}
@@ -149,7 +169,11 @@ $$
 \end{align*}
 $$
 
-where $\mathbf{v}$ denotes the instantaneous object velocity. This implication simply means that there is no set of object velocities that would lead to separation at any contact point. An equivalent formulation of this implication can be written for the set of contact forces applied to the object. Let's denote the magnitude of the normal component of the contact force as $\mathbf{f}_{n}$, then a grasp has first order form closure iff:
+where $\mathbf{v}$ denotes the instantaneous object velocity. This implication simply means 
+that there is no set of object velocities that would lead to separation at any contact point. 
+An equivalent formulation of this implication can be written for the set of contact forces 
+applied to the object. Let's denote the magnitude of the normal component of the contact force 
+as $\mathbf{f}_{n}$, then a grasp has first order form closure iff:
 
 $$
 \begin{align*}
@@ -158,9 +182,15 @@ $$
 \end{align*}
 $$
 
-The physical interpretation of this condition is that equilibrium can be maintained under the assumption that contacts are frictionless. We emphasize that $\mathbf{f}_n$ is only the magnitude of the normal component of the contact force and no other components. Since $\mathbf{g}$ is any vector in $\mathrm{R}^6$, for the inequality to hold we require that $\mathbf{g}$ be in the range of $\mathrm{G}_n$. Consequently, the rank of $\mathrm{G}_n$ must be 6 for the vector to lie in its range for all values it can take.
+The physical interpretation of this condition is that equilibrium can be maintained under the 
+assumption that contacts are frictionless. We emphasize that $\mathbf{f}_n$ is only the magnitude 
+of the normal component of the contact force and no other components. Since $\mathbf{g}$ is any 
+vector in $\mathrm{R}^6$, for the inequality to hold we require that $\mathbf{g}$ be in the 
+range of $\mathrm{G}_n$. Consequently, the rank of $\mathrm{G}_n$ must be 6 for the vector to 
+lie in its range for all values it can take.
 
-We can also write the condition for first order form closure as there exists $\mathbf{f}_n$ such that the following two conditions hold:
+We can also write the condition for first order form closure as there exists $\mathbf{f}_n$ 
+such that the following two conditions hold:
 
 $$
 \begin{align*}
@@ -169,7 +199,12 @@ $$
 \end{align*}
 $$
 
-This condition means that there exists a set of strictly compressive normal contact forces in the null space of $\mathrm{G}_n$. This also means that we can squeeze the object as tightly as we'd like while maintaining equilibrium (at no point will the object leave the grasp). For the above conditions to hold, Somov 1897 proved that at least 7 contacts are necessary for a 6 degree of freedom object and 4 are required for the planar case. Fig.~\ref{fig:chap1:form-example} shows some example form closures in the plane (with 4 points of contact).
+This condition means that there exists a set of strictly compressive normal contact forces in the 
+null space of $\mathrm{G}_n$. This also means that we can squeeze the object as tightly as we'd 
+like while maintaining equilibrium (at no point will the object leave the grasp). For the above 
+conditions to hold, Somov 1897 proved that at least 7 contacts are necessary for a 6 degree of 
+freedom object and 4 are required for the planar case. Fig.~\ref{fig:chap1:form-example} shows 
+some example form closures in the plane (with 4 points of contact).
 
 <figure>
 <p align="center">
@@ -181,14 +216,81 @@ This condition means that there exists a set of strictly compressive normal cont
 </figure>
 
 
-Geometrically, we can describe form closure using the composite friction cones we discussed in the previous sections. This idea is illustrated in Fig.~\ref{fig:chap1:form-geom}.
+Geometrically, we can describe form closure using the composite friction cones we discussed in the 
+previous sections. This idea is illustrated in Fig.~\ref{fig:chap1:form-geom}.
 
 <figure>
 <p align="center">
   <img src="figures/chapter-1-form-closure-gm.png" />
 </p>
 <figcaption> 
-  <b>Fig. 5:</b> Geometric interpretation of the form closure. Each finger is permitted to only apply a force along the normal. Consequently, wrench cones can be produced by having multiple contacts with non-co-linear normals. If the resulting cone spans the entire wrench space, then form closure is possible.
+  <b>Fig. 5:</b> Geometric interpretation of the form closure. Each finger is permitted to only 
+  apply a force along the normal. Consequently, wrench cones can be produced by having multiple 
+  contacts with non-co-linear normals. If the resulting cone spans the entire wrench space, then form closure is possible.
 </figcaption>
 </figure>
+
+## First order form closure tests
+
+To test whether a grasp has form closure, we'd like to check whether we can find a $\myvec{f}_n$ 
+such that the following two conditions hold:
+
+$$
+    \mymat{G}_n \myvec{f}_n & = 0 \\
+    \myvec{f}_n & > 0
+$$
+
+Let's denote the smallest component of $\myvec{f}_n$ as $d$. If we can find $d>0$, it would 
+imply that $\myvec{f}_n >0$. We can do this with the following linear program:
+
+$$
+    \textbf{LP1:} \quad \quad &  \text{maximize} \quad \quad & d &  \\
+                              & \text{s.t.}  & \mymat{G}_n \myvec{f}_n &= 0 \\
+                              &  & \mymat{I} \myvec{f}_n - \myvec{1}d &\geq 0 \\
+    &  & d & \geq 0 \\
+    &  & \myvec{1}^T \myvec{f}_n &\leq N \\
+$$
+
+where $\mymat{I}$ is the identity matrix and $\myvec{1}$ is a vector with all components equal to 1. 
+If this LP is infeasible or the optimal value $d^*$ is zero, then the grasp is not in form closure. 
+We can formalize this procedure as follows:
+
+**Form Closure Test:**
+
+
+- Compute the rank of $\mymat{G}_n$:
+  - If this rank is less than 4 in the planar case or 7 in the 3D case, then form closure does not exist;
+  - Else, the rank is adequate, proceed.  
+- Solve LP1:
+  - if $d^* = 0$ then form closure does not exist;
+  - if $d^* > 0$ then form closure exists and $d^*$ is a crude measure of how far the grasp is from losing form closure
+
+Intuitively, if the smallest term in $\myvec{f}_n$ is close to zero, then $\mymat{G}_n$ is close 
+to loosing rank which means that normal vectors of contacts are close to being dependent. This means 
+that our grasp is close to losing form closure. 
+
+In summary, form closure is a fundamentally geometric constraint. It does not depend on frictional 
+properties, rather it immobilizes the object using the concept of jamming. Form closure is a robust 
+grasping strategy and a desirable one when it is possible to form. For the set of rigid-bodies, 
+calculating form closure is equivalent to the solution of a linear program which can be done rapidly. 
+One important drawback of form closure is the relatively large number of contacts required to 
+produce it. In the following section, we study a different form of restraining that relies on contact 
+mechanics and requires fewer contacts.
+
+Let's go through some examples, take a look at Fig.~\ref{fig:chap1:form}. Which of these grasps are 
+form closures? The first grasp is in form closure of first order. The second grasp is not in form 
+closure of the first order, but it is in form closure of the second order. The third grasp is not 
+in form closure at all. To understand the form closure of the second grasp, try to imagine a change 
+in configuration of the object that does not violate the non-penetration constraint. Can you find 
+such a change?
+
+<figure>
+<p align="center">
+  <img src="figures/chapter-1-forms.png" />
+</p>
+<figcaption> 
+  <b>Fig. 6:</b> Which of the above are form closures? This image is from \citet{prattichizzo2016grasping}
+</figcaption>
+</figure>
+
 
