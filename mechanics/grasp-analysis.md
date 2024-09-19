@@ -112,7 +112,9 @@ With the grasp matrix in hand, we are now staged to begin our discussion on usef
 We will begin with the notion of form closure. Intuitively, if the grasped object is in form closure 
 then it is fully geometrically immobilized by the set contacts. We cannot perturb the object's 
 configuration without violating any contact constraints; i.e. non-penetration. This simply means 
-that any change in the configuration of the object with respect to the robot would lead to penetration of the object and is therefore impossible. This intuitive explanation is precisely how we write down and solve for form closure.
+that any change in the configuration of the object with respect to the robot would lead to penetration of 
+the object and is therefore impossible. This intuitive explanation is precisely how we write down and 
+solve for form closure.
 
 As in the previous subsection, let's assume that there are a total of $N$ frictional contacts, each 
 applying a force $\mathbf{f}_i$ at contact points $i=1, ..., N$. For each contact point, we define a 
@@ -236,19 +238,23 @@ To test whether a grasp has form closure, we'd like to check whether we can find
 such that the following two conditions hold:
 
 $$
+\begin{align}
     \mathrm{G}_n \mathbf{f}_n & = 0 \\
     \mathbf{f}_n & > 0
+\end{align}
 $$
 
 Let's denote the smallest component of $\mathbf{f}_n$ as $d$. If we can find $d>0$, it would 
 imply that $\mathbf{f}_n >0$. We can do this with the following linear program:
 
 $$
+\begin{algin}
     \textbf{LP1:} \quad \quad &  \text{maximize} \quad \quad & d &  \\
                               & \text{s.t.}  & \mathrm{G}_n \mathbf{f}_n &= 0 \\
                               &  & \mathrm{I} \mathbf{f}_n - \mathbf{1}d &\geq 0 \\
     &  & d & \geq 0 \\
     &  & \mathbf{1}^T \mathbf{f}_n &\leq N \\
+\end{align}
 $$
 
 where $\mathrm{I}$ is the identity matrix and $\mathbf{1}$ is a vector with all components equal to 1. 
