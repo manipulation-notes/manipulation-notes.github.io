@@ -114,9 +114,25 @@ then it is fully geometrically immobilized by the set contacts. We cannot pertur
 configuration without violating any contact constraints; i.e. non-penetration. This simply means 
 that any change in the configuration of the object with respect to the robot would lead to penetration of 
 the object and is therefore impossible. This intuitive explanation is precisely how we write down and 
-solve for form closure.
+solve for form closure. 
 
-As in the previous subsection, let's assume that there are a total of $N$ frictional contacts, each 
+Before diving into the mathematical derivation, let's go through some examples. Take a look at Fig. 3. 
+Which of these grasps are form closures? The first grasp is in form closure of first order. The second 
+grasp is not in form closure of the first order, but it is in form closure of the second order. The third 
+grasp is not in form closure at all. To understand the form closure of the second grasp, try to imagine a change 
+in configuration of the object that does not violate the non-penetration constraint. Can you find 
+such a change?
+
+<figure>
+<p align="center">
+  <img src="figures/chapter-1-forms.png" />
+</p>
+<figcaption> 
+  <b>Fig. 3:</b> Which of the above are form closures? This image is from \citet{prattichizzo2016grasping}
+</figcaption>
+</figure>
+
+Now for th derivation: As in the previous subsection, let's assume that there are a total of $N$ frictional contacts, each 
 applying a force $\mathbf{f}_i$ at contact points $i=1, ..., N$. For each contact point, we define a 
 distance function $\psi_i(\mathbf{q}, \mathbf{q}_c)$ for $i=1, ..., N$, where $\mathbf{q}$ denotes 
 the object configuration and $\mathbf{q}_c$ denotes the configuration of the fingers. Together, these 
@@ -310,20 +326,31 @@ One important drawback of form closure is the relatively large number of contact
 produce it. In the following section, we study a different form of restraining that relies on contact 
 mechanics and requires fewer contacts.
 
-Let's go through some examples, take a look at Fig.~\ref{fig:chap1:form}. Which of these grasps are 
-form closures? The first grasp is in form closure of first order. The second grasp is not in form 
-closure of the first order, but it is in form closure of the second order. The third grasp is not 
-in form closure at all. To understand the form closure of the second grasp, try to imagine a change 
-in configuration of the object that does not violate the non-penetration constraint. Can you find 
-such a change?
+
+**Force Closure** 
+
+In form closure, we noted that the constraints against external wrenches and motion are entirely 
+geometric. There was no need to consider forces but we did need a rather large number of contacts. 
+In force closure, we require that the contacts can resist any object wrench (any set of external 
+forces and torques applied to the center of mass of the object). The key difference is that we allow 
+frictional forces to help maintain the grasp; i.e. resist the object wrench. The key contribution is 
+then a reduced number of contacts by virtue of including frictional forces. In fact, for a 3D object, 
+we only need 2 soft finger contacts or 3 hard finger contacts for force closure rather than the 7 
+needed in form closure.
+
+A fundamental requirement for form closure is that the hand/fingers must be able to squeeze arbitrarily 
+tightly to account for any external wrench (no matter how large) applied to the object. For example, 
+consider the object depicted in Fig.~\ref{fig:chap1:fc1}. The frictional force is able to resist any push 
+we apply to the object along its $y$ axis with a line of action passing through the center of 
+mass -- as long as there is enough normal force to produce sufficient frictional tangent force.
 
 <figure>
 <p align="center">
-  <img src="figures/chapter-1-forms.png" />
+  <img src="figures/chapter-1-fc-1.png" />
 </p>
 <figcaption> 
-  <b>Fig. 6:</b> Which of the above are form closures? This image is from \citet{prattichizzo2016grasping}
+  <b>Fig. 6:</b> Example of a force closure induced by a ``pinch grasp''. The tighter the 
+  fingers pinch the object (yes that is actually a technical term), the more $y$ force 
+  can be resisted by the frictional force at the fingers.
 </figcaption>
 </figure>
-
-
