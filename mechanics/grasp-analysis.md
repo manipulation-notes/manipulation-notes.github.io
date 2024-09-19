@@ -232,40 +232,40 @@ previous sections. This idea is illustrated in Fig.~\ref{fig:chap1:form-geom}.
 
 ## First order form closure tests
 
-To test whether a grasp has form closure, we'd like to check whether we can find a $\myvec{f}_n$ 
+To test whether a grasp has form closure, we'd like to check whether we can find a $\mathbf{f}_n$ 
 such that the following two conditions hold:
 
 $$
-    \mymat{G}_n \myvec{f}_n & = 0 \\
-    \myvec{f}_n & > 0
+    \mathrm{G}_n \mathbf{f}_n & = 0 \\
+    \mathbf{f}_n & > 0
 $$
 
-Let's denote the smallest component of $\myvec{f}_n$ as $d$. If we can find $d>0$, it would 
-imply that $\myvec{f}_n >0$. We can do this with the following linear program:
+Let's denote the smallest component of $\mathbf{f}_n$ as $d$. If we can find $d>0$, it would 
+imply that $\mathbf{f}_n >0$. We can do this with the following linear program:
 
 $$
     \textbf{LP1:} \quad \quad &  \text{maximize} \quad \quad & d &  \\
-                              & \text{s.t.}  & \mymat{G}_n \myvec{f}_n &= 0 \\
-                              &  & \mymat{I} \myvec{f}_n - \myvec{1}d &\geq 0 \\
+                              & \text{s.t.}  & \mathrm{G}_n \mathbf{f}_n &= 0 \\
+                              &  & \mathrm{I} \mathbf{f}_n - \mathbf{1}d &\geq 0 \\
     &  & d & \geq 0 \\
-    &  & \myvec{1}^T \myvec{f}_n &\leq N \\
+    &  & \mathbf{1}^T \mathbf{f}_n &\leq N \\
 $$
 
-where $\mymat{I}$ is the identity matrix and $\myvec{1}$ is a vector with all components equal to 1. 
+where $\mathrm{I}$ is the identity matrix and $\mathbf{1}$ is a vector with all components equal to 1. 
 If this LP is infeasible or the optimal value $d^*$ is zero, then the grasp is not in form closure. 
 We can formalize this procedure as follows:
 
 **Form Closure Test:**
 
 
-- Compute the rank of $\mymat{G}_n$:
+- Compute the rank of $\mathrm{G}_n$:
   - If this rank is less than 4 in the planar case or 7 in the 3D case, then form closure does not exist;
   - Else, the rank is adequate, proceed.  
 - Solve LP1:
   - if $d^* = 0$ then form closure does not exist;
   - if $d^* > 0$ then form closure exists and $d^*$ is a crude measure of how far the grasp is from losing form closure
 
-Intuitively, if the smallest term in $\myvec{f}_n$ is close to zero, then $\mymat{G}_n$ is close 
+Intuitively, if the smallest term in $\mathbf{f}_n$ is close to zero, then $\mathrm{G}_n$ is close 
 to loosing rank which means that normal vectors of contacts are close to being dependent. This means 
 that our grasp is close to losing form closure. 
 
