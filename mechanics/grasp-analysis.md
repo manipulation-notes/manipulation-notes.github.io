@@ -622,11 +622,13 @@ where $\mathrm{F} = \text{BlockDiag}(\mathrm{F}_1, \cdots, \mathrm{F}_{n_c})$.
 
 We are now ready to test for force closure. Our procedure is as follows:
 
-1. Compute the rank of $\mathrm{G}$:
-   1. if the rank is 3 in the planar case or 6 in the 3D case, continue;
-   2. else, force closure is not possible
-2. Solve the frictional form closure linear program (LP2):
-   
+**First:** Compute the rank of $\mathrm{G}$:
+
+1. if the rank is 3 in the planar case or 6 in the 3D case, continue;
+2. else, force closure is not possible
+
+**Second:** Solve the frictional form closure linear program (LP2):
+
 $$
 \begin{align*}
 \textbf{LP2:} \quad \quad &  \text{maximize} \quad \quad & d &  \\
@@ -640,11 +642,22 @@ $$
 where the optimal value $d^*$ is a measure of the distance between the contact
 force and the boundary of the friction cone. The larger this value, the more stable
 the grasp. If $d^*=0$ then force closure is not possible. Here we
-define $\mathbf{e}_i = [1 \; 0\; 0\; 0\; 0\; 0]$ and $\mathbf{e}=[\mathbf{e}_1, \cdots \mathbf{e}_{n_c}]$,
-these vectors are responsible for picking out the normal component of the contact
+define: 
+
+$$
+\mathbf{e}_i = [1 \; 0\; 0\; 0\; 0\; 0]
+$$ 
+
+and:
+
+$$
+\mathbf{e}=[\mathbf{e}_1, \cdots \mathbf{e}_{n_c}]
+$$
+
+where these vectors are responsible for picking out the normal component of the contact
 force for each contact.
 
-4. Solve the check for $\mathcal{N}(\mathrm{G}) \cap \mathcal{N}(\mathrm{J}^T)=0$ with LP3:
+**Third:** Solve the check for $\mathcal{N}(\mathrm{G}) \cap \mathcal{N}(\mathrm{J}^T)=0$ with LP3:
 
 $$
 \begin{align*}
@@ -657,7 +670,13 @@ $$
 \end{align*}
 $$
 
-where $\mathrm{E}=\text{BlockDiag}(\mathbf{e}_1, \cdots, \mathbf{e}_{n_c})$. If $d^*=0$ then force closure exists.
+where: 
+
+$$
+\mathrm{E}=\text{BlockDiag}(\mathbf{e}_1, \cdots, \mathbf{e}_{n_c})
+$$ 
+
+If $d^*=0$ then force closure exists.
 
 The polyhedral approximation to the friction cone is exact for the planar case and we can write:
 
