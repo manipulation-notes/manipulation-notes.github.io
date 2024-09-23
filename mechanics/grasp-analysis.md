@@ -604,11 +604,10 @@ $$
 \end{align*}
 $$
 
-where $ \mathrm{F}_i $ is a matrix whose rows are composed of the normals to the 
-faces formed by two adjacent generators of the approximate cone. 
-
-For example, in the hard finger contact, row $i$ of $ \mathrm{F}_i $ can be computed 
-as the cross product of $ \mathbf{s}_i $ and $ \mathbf{s}_{i+1} $. 
+where $`\mathrm{F}_i`$ is a matrix whose rows are composed of the normals to the 
+faces formed by two adjacent generators of the approximate cone. For example, in 
+the hard finger contact, row $i$ of $`\mathrm{F}_i`$ can be computed 
+as the cross product of $`\mathbf{s}_i`$ and $`\mathbf{s}_{i+1}`$. 
 
 The intuitive interpretation of the inequalities is that we require the reaction 
 force to be in the interior of the space created by the intersection of the set of 
