@@ -327,7 +327,7 @@ produce it. In the following section, we study a different form of restraining t
 mechanics and requires fewer contacts.
 
 
-**Force Closure** 
+## Force Closure 
 
 In form closure, we noted that the constraints against external wrenches and motion are entirely 
 geometric. There was no need to consider forces but we did need a rather large number of contacts. 
@@ -354,3 +354,62 @@ mass -- as long as there is enough normal force to produce sufficient frictional
   can be resisted by the frictional force at the fingers.
 </figcaption>
 </figure>
+
+Since our discussion depends heavily on the finger type (and contact type), let's discuss 3 pervasive models:
+
+- **Friction-free:** This type of finger can only apply a force along the contact normal. It is not
+  permitted to apply tangential/frictional forces. Imagine this type of finger as made of ice!
+  We may write the contact force in the contact frame as:
+  $$
+    \begin{align*}
+        \mathbf{f}_c = \begin{bmatrix} 0, & 0, & f_n, & 0, & 0, 0, & 0\end{bmatrix}^T
+    \end{align*}
+  $$
+- **Hard finger:** The contact is well approximated by a point. It is allowed to transmit a normal force,
+  and a tangential force in the contact plane.
+  $$
+    \begin{align*}
+        \mathbf{f}_c = \begin{bmatrix} f_{t,1}, & f_{t,2}, & f_n, & 0, & 0, & 0\end{bmatrix}^T
+    \end{align*}
+  $$
+  with the constraint that:
+  $$
+    \begin{align*}
+        \sqrt{f^2_{t,1} + f^2_{t,2}} \leq \mu f_n
+    \end{align*}
+  $$
+- **Soft finger:** The contact is well approximated by a patch. The patch can transmit the
+  same forces as a hard finger and an additional rotational torque, perpendicular to the contact plane.
+  $$
+    \begin{align*}
+        \mathbf{f}_c = \begin{bmatrix} f_{t,1}, & f_{t,2}, & f_n, & 0, & 0, & \tau_p\end{bmatrix}^T
+    \end{align*}
+  $$
+  with the constraint that:
+    \begin{align*}
+        \frac{1}{\mu}\sqrt{f^2_{t,1} + f^2_{t,2}} + \frac{1}{\alpha \nu} \sqrt{\tau^2_p} \leq  f_n
+    \end{align*}
+  where $\nu$ is the torsional friction coefficient and $\alpha$ is the characteristic
+  length of the object to ensure consistency of units between the force and torque components.
+
+
+We note that while these are 3 simple models, they do an excellent job of describing a large set of fingers
+that we may encounter. An important aspect of each of these definitions is that the contact reaction 
+force lies in the friction cone induced by the type of contact and it's specific parameters. Specifically, 
+for the hard finger, we can write the Coulomb friction cone $\mathcal{F}$:
+
+$$
+\begin{align*}
+    \mathcal{F} = \{ (f_n, f_{t,1}, f_{t,2}) \quad | \quad \sqrt{f^2_{t,1} + f^2_{t,2}} \leq \mu f_n \}
+\end{align*}
+$$
+
+and for the soft finger we can write the friction cone as:
+
+$$
+\begin{align*}
+    \mathcal{F} = \{(f_n, f_{t,1}, f_{t,2}, \tau_p) \quad | \quad \frac{1}{\mu}\sqrt{f^2_{t,1} + f^2_{t,2}} + \frac{1}{\alpha \nu} \sqrt{\tau^2_p} \leq f_n \}
+\end{align*}
+$$
+
+### Force Closure Definition
