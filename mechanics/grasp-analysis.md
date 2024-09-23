@@ -428,10 +428,12 @@ $$
 
 Recall from our form closure discussion that we defined a grasp as having form closure if:
 
+$$
 \begin{align*}
     \mathrm{G}_n \mathbf{f}_n & = - \mathbf{g} \\
     \mathbf{f}_n &> 0
 \end{align*}
+$$
 
 for all external wrenches applies to the object. In the definition of force closure, 
 we still require that the grasp resists all external wrenches applied to the object. 
@@ -498,7 +500,12 @@ $$
 where the first term is the particular solution (pseudo inverse of $\mathrm{G}$ multiplied by 
 the external wrench) and the second term $\bar{\mathrm{G}}$ (matrix with columns of the null space 
 of $\mathrm{G}$) and $\mathbf{x}$ is the coefficient vector of the parameterization of the homogeneous 
-solution. The set of internal contact forces $\mathbf{f}_{c,int} = \bar{\mathrm{G}}\mathbf{f}_{c,null}$ 
+solution. The set of internal contact forces: 
+
+$$
+\mathbf{f}_{c,int} = \bar{\mathrm{G}}\mathbf{f}_{c,null}
+$$
+
 do not affect the solution of the equation above; however, they play a key role in determining the stability 
 of the grasp. They specify how tightly we can grasp the object. Without the null space, the grasp can at 
 most resist only one particular value of externally applied wrenches.
@@ -549,12 +556,21 @@ $$
 \end{align*}
 $$
 
-where $\mathrm{S}_i = [\mathbf{s}_{i1} \cdots \mathbf{s}_{in_g}]$ and $\mathbf{p}_i$ is a vector 
-of non-negative generator weights. Let's write the expressions for $\mathrm{S}_i$ for each type 
-of contact:
+where: 
+
+$$
+\mathrm{S}_i = [\mathbf{s}_{i1} \cdots \mathbf{s}_{in_g}]
+$$
+
+and $\mathbf{p}_i$ is a vector of non-negative generator weights. Let's write the 
+expressions for $\mathrm{S}_i$ for each type of contact:
 
 **Friction free:** In this case the cone collapses to a line with $n_g = 1$
-and $\mathrm{S}_i = [\hat{\mathbf{n}}_i^T \quad ((\mathbf{c}_i - \mathbf{p}) \times \hat{\mathbf{n}}_i)^T ]^T$.
+and: 
+
+$$
+\mathrm{S}_i = \begin{bmatrix}\hat{\mathbf{n}}_i^T \quad ((\mathbf{c}_i - \mathbf{p}) \times \hat{\mathbf{n}}_i)^T \end{bmatrix}^T
+$$
 
 **Hard finger:** The friction cone is represented by the non-negative sum of uniformly 
 spaced contact force generators whose non-negative span approximates the Coulomb cone 
