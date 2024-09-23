@@ -360,20 +360,24 @@ Since our discussion depends heavily on the finger type (and contact type), let'
 **Friction-free:** This type of finger can only apply a force along the contact normal. It is not
 permitted to apply tangential/frictional forces. Imagine this type of finger as made of ice!
 We may write the contact force in the contact frame as:
+
 $$
-  \begin{align*}
-      \mathbf{f}_c = \begin{bmatrix} 0, & 0, & f_n, & 0, & 0, 0, & 0\end{bmatrix}^T
-  \end{align*}
+\begin{align*}
+    \mathbf{f}_c = \begin{bmatrix} 0, & 0, & f_n, & 0, & 0, 0, & 0\end{bmatrix}^T
+\end{align*}
 $$
 
 **Hard finger:** The contact is well approximated by a point. It is allowed to transmit a normal force,
 and a tangential force in the contact plane.
+
 $$
   \begin{align*}
       \mathbf{f}_c = \begin{bmatrix} f_{t,1}, & f_{t,2}, & f_n, & 0, & 0, & 0\end{bmatrix}^T
   \end{align*}
 $$
+
 with the constraint that:
+
 $$
   \begin{align*}
       \sqrt{f^2_{t,1} + f^2_{t,2}} \leq \mu f_n
@@ -382,15 +386,21 @@ $$
 
 **Soft finger:** The contact is well approximated by a patch. The patch can transmit the
 same forces as a hard finger and an additional rotational torque, perpendicular to the contact plane.
+
 $$
   \begin{align*}
       \mathbf{f}_c = \begin{bmatrix} f_{t,1}, & f_{t,2}, & f_n, & 0, & 0, & \tau_p\end{bmatrix}^T
   \end{align*}
 $$
+
 with the constraint that:
-  \begin{align*}
-      \frac{1}{\mu}\sqrt{f^2_{t,1} + f^2_{t,2}} + \frac{1}{\alpha \nu} \sqrt{\tau^2_p} \leq  f_n
-  \end{align*}
+
+$$
+\begin{align*}
+    \frac{1}{\mu}\sqrt{f^2_{t,1} + f^2_{t,2}} + \frac{1}{\alpha \nu} \sqrt{\tau^2_p} \leq  f_n
+\end{align*}
+$$
+
 where $\nu$ is the torsional friction coefficient and $\alpha$ is the characteristic
 length of the object to ensure consistency of units between the force and torque components.
 
@@ -419,8 +429,8 @@ $$
 Recall from our form closure discussion that we defined a grasp as having form closure if:
 
 \begin{align*}
-    \mathrm{G}_n \bm{f}_n & = - \bm{g} \\
-    \bm{f}_n &> 0
+    \mathrm{G}_n \mathbf{f}_n & = - \mathbf{g} \\
+    \mathbf{f}_n &> 0
 \end{align*}
 
 for all external wrenches applies to the object. In the definition of force closure, 
@@ -431,8 +441,8 @@ express these conditions mathematically as:
 
 $$
 \begin{align*}
-    \mathrm{G} \bm{f}_c & = - \bm{g} \\
-    \bm{f}_c  &\in  \mathcal{F}
+    \mathrm{G} \mathbf{f}_c & = - \mathbf{g} \\
+    \mathbf{f}_c  &\in  \mathcal{F}
 \end{align*}
 $$
 
@@ -440,7 +450,7 @@ where $\mathcal{F}$ denotes the composite friction cone as is defined as:
 
 $$
 \begin{align*}
-    \mathcal{F} = \mathcal{F}_1 \times ... \times \mathcal{F}_N = \{ \bm{f}_{c,i}  \in \mathcal{F}_i; \quad i=1, ..., N \}
+    \mathcal{F} = \mathcal{F}_1 \times ... \times \mathcal{F}_N = \{ \mathbf{f}_{c,i}  \in \mathcal{F}_i; \quad i=1, ..., N \}
 \end{align*}
 $$
 
@@ -456,13 +466,13 @@ the following two conditions hold:
 $$
 \begin{align*}
     & rank(\mathrm{G}) = 3 \; (\text{planar}) \quad \text{or} \quad 6 \; (\text{3D}) \\
-    & \exists \bm{f}_c \; \text{s.t.} \; \; \mathrm{G}\bm{f}_c=0 \quad \text{and} \quad \bm{f}_c \in Interior(\mathcal{F})
+    & \exists \mathbf{f}_c \; \text{s.t.} \; \; \mathrm{G}\mathbf{f}_c=0 \quad \text{and} \quad \mathbf{f}_c \in Interior(\mathcal{F})
 \end{align*}
 $$
 
 **A set of frictional contacts yields force closure if the positive span of the wrench cones is the entire wrench space.** 
 The rank condition means that the composite wrench cone spans the entire wrench space. For the second 
-condition, since $\bm{f}_c \geq 0$ this ensures that the positive span of the wrench cones spans the 
+condition, since $\mathbf{f}_c \geq 0$ this ensures that the positive span of the wrench cones spans the 
 entire wrench space. 
 
 Put another way, the first condition means that we want to span the space of all possible external wrenches 
@@ -473,7 +483,7 @@ composite friction cone. To understand better what this means, consider that we'
 
 $$
 \begin{align*}
-    \mathrm{G}\bm{f}_c = -\bm{g}
+    \mathrm{G}\mathbf{f}_c = -\mathbf{g}
 \end{align*}
 $$
 
@@ -481,14 +491,14 @@ so we may write:
 
 $$
 \begin{align*}
-    \bm{f}_c = - \mathrm{G}^\dagger \bm{g} + \bar{\mathrm{G}} \bm{f}_{c,null}
+    \mathbf{f}_c = - \mathrm{G}^\dagger \mathbf{g} + \bar{\mathrm{G}} \mathbf{f}_{c,null}
 \end{align*}
 $$
 
 where the first term is the particular solution (pseudo inverse of $\mathrm{G}$ multiplied by 
 the external wrench) and the second term $\bar{\mathrm{G}}$ (matrix with columns of the null space 
-of $\mathrm{G}$) and $\bm{x}$ is the coefficient vector of the parameterization of the homogeneous 
-solution. The set of internal contact forces $\bm{f}_{c,int} = \bar{\mathrm{G}}\bm{f}_{c,null}$ 
+of $\mathrm{G}$) and $\mathbf{x}$ is the coefficient vector of the parameterization of the homogeneous 
+solution. The set of internal contact forces $\mathbf{f}_{c,int} = \bar{\mathrm{G}}\mathbf{f}_{c,null}$ 
 do not affect the solution of the equation above; however, they play a key role in determining the stability 
 of the grasp. They specify how tightly we can grasp the object. Without the null space, the grasp can at 
 most resist only one particular value of externally applied wrenches.
@@ -501,7 +511,7 @@ $$
 \begin{align*}
     & rank(\mathrm{G}) = 3 \; (\text{planar}) \quad \text{or} \quad 6 \; (\text{3D}) \\
     & \mathcal{N}(\mathrm{G}) \cap \mathcal{N}(\mathrm{J}_f^T) = 0 \\
-    & \exists \bm{f}_c \; \text{s.t.} \; \; \mathrm{G}\bm{f}_c=0 \quad \text{and} \quad \bm{f}_c \in Interior(\mathcal{F})
+    & \exists \mathbf{f}_c \; \text{s.t.} \; \; \mathrm{G}\mathbf{f}_c=0 \quad \text{and} \quad \mathbf{f}_c \in Interior(\mathcal{F})
 \end{align*}
 $$
 
@@ -530,21 +540,21 @@ shows an example of a linearized friction cone.
 
 Any of the friction cones we have discussed so far (induced by the friction free, hard finger, or 
 soft finger) can be approximated by the non-negative span of a finite number $n_g$ of generators 
-$\bm{s}_{ij}$ of the friction cone. We can represent the set of applicable contact forces at 
+$\mathbf{s}_{ij}$ of the friction cone. We can represent the set of applicable contact forces at 
 contact $i$ as:
 
 $$
 \begin{align*}
-    \mathrm{G}_i \bm{f}_{c,i} = \mathrm{S}_i \bm{p}_i, \quad \mathrm{p}_i \geq 0
+    \mathrm{G}_i \mathbf{f}_{c,i} = \mathrm{S}_i \mathbf{p}_i, \quad \mathrm{p}_i \geq 0
 \end{align*}
 $$
 
-where $\mathrm{S}_i = [\bm{s}_{i1} \cdots \bm{s}_{in_g}]$ and $\bm{p}_i$ is a vector 
+where $\mathrm{S}_i = [\mathbf{s}_{i1} \cdots \mathbf{s}_{in_g}]$ and $\mathbf{p}_i$ is a vector 
 of non-negative generator weights. Let's write the expressions for $\mathrm{S}_i$ for each type 
 of contact:
 
 **Friction free:** In this case the cone collapses to a line with $n_g = 1$
-and $\mathrm{S}_i = [\hat{\bm{n}}_i^T \quad ((\bm{c}_i - \bm{p}) \times \hat{\bm{n}}_i)^T ]^T$.
+and $\mathrm{S}_i = [\hat{\mathbf{n}}_i^T \quad ((\mathbf{c}_i - \mathbf{p}) \times \hat{\mathbf{n}}_i)^T ]^T$.
 
 **Hard finger:** The friction cone is represented by the non-negative sum of uniformly 
 spaced contact force generators whose non-negative span approximates the Coulomb cone 
@@ -566,6 +576,7 @@ $$
     \mathrm{S}_i = \begin{bmatrix} \cdots & 1 & \cdots & 1 & 1 \\ \cdots & \mu_i \text{cos}(2k\pi/n_g) & \cdots & 0 & 0 \\ \cdots & \mu_i\text{sin}(2k\pi/n_g) & \cdots & 0 & 0 \\ \cdots & 0 & \cdots & bv_i & -bv_i  \end{bmatrix}
 \end{align*}
 $$
+
 where $b$ is a characteristic length used to unify the units and $v_i$ is the torsional friction coefficient.
 
 This polyhedral approximation to the friction cone allows us to efficiently represent 
@@ -573,21 +584,21 @@ the friction cone as a set of linear inequalities:
 
 $$
 \begin{align*}
-    \mathrm{F}_i \bm{f}_{ci} \geq 0
+    \mathrm{F}_i \mathbf{f}_{ci} \geq 0
 \end{align*}
 $$
 
 where $\mathrm{F}_i$ is a matrix whose rows are composed of the normals to the 
 faces formed by two adjacent generators of the approximate cone. For example, in the 
 hard finger contact, row $i$ of $\mathrm{F}_i$ can be computed as the cross product 
-of $\bm{s}_i$ and $\bm{s}_{i+1}$. The intuitive interpretation of the inequalities is 
+of $\mathbf{s}_i$ and $\mathbf{s}_{i+1}$. The intuitive interpretation of the inequalities is 
 that we require the reaction force to be in the interior of the space created by the 
 intersection of the set of half planes making up the sides of the friction cone. We can 
 compose the set of all contact and their reaction forces in the compact form:
 
 $$
 \begin{align*}
-    \mathrm{F} \bm{f}_{c} \geq 0
+    \mathrm{F} \mathbf{f}_{c} \geq 0
 \end{align*}
 $$
 
@@ -599,35 +610,38 @@ We are now ready to test for force closure. Our procedure is as follows:
    1. if the rank is 3 in the planar case or 6 in the 3D case, continue;
    2. else, force closure is not possible
 2. Solve the frictional form closure linear program (LP2):
+   
 $$
 \begin{align*}
 \textbf{LP2:} \quad \quad &  \text{maximize} \quad \quad & d &  \\
-                          & \text{s.t.}  & \mathrm{G} \bm{f}_c &= 0 \\
-                          &  & \mathrm{F} \bm{f}_c - \bm{1}d &\geq 0 \\
+                          & \text{s.t.}  & \mathrm{G} \mathbf{f}_c &= 0 \\
+                          &  & \mathrm{F} \mathbf{f}_c - \mathbf{1}d &\geq 0 \\
 &  & d & \geq 0 \\
-&  & \bm{e}^T \bm{f}_n &\leq N
+&  & \mathbf{e}^T \mathbf{f}_n &\leq N
 \end{align*}
 $$
+
 where the optimal value $d^*$ is a measure of the distance between the contact
 force and the boundary of the friction cone. The larger this value, the more stable
 the grasp. If $d^*=0$ then force closure is not possible. Here we
-define $\bm{e}_i = [1 \; 0\; 0\; 0\; 0\; 0]$ and $\bm{e}=[\bm{e}_1, \cdots \bm{e}_{n_c}]$,
+define $\mathbf{e}_i = [1 \; 0\; 0\; 0\; 0\; 0]$ and $\mathbf{e}=[\mathbf{e}_1, \cdots \mathbf{e}_{n_c}]$,
 these vectors are responsible for picking out the normal component of the contact
 force for each contact.
 
-3. Solve the check for $\mathcal{N}(\mathrm{G}) \cap \mathcal{N}(\mathrm{J}^T)=0$ with LP3:
+4. Solve the check for $\mathcal{N}(\mathrm{G}) \cap \mathcal{N}(\mathrm{J}^T)=0$ with LP3:
 
 $$
 \begin{align*}
 \textbf{LP3:} \quad \quad &  \text{maximize} \quad \quad & d &  \\
-                          & \text{s.t.}  & \mathrm{G} \bm{f}_c  &= 0 \\
-                          &              & \mathrm{J}^T\bm{f}_c  & = 0 \\
-                          &  & \mathrm{E} \bm{f}_c - \bm{1}d &\geq 0 \\
+                          & \text{s.t.}  & \mathrm{G} \mathbf{f}_c  &= 0 \\
+                          &              & \mathrm{J}^T\mathbf{f}_c  & = 0 \\
+                          &  & \mathrm{E} \mathbf{f}_c - \mathbf{1}d &\geq 0 \\
 &  & d & \geq 0 \\
-&  & \bm{e}^T \bm{f}_n &\leq N \\
+&  & \mathbf{e}^T \mathbf{f}_n &\leq N \\
 \end{align*}
 $$
-where $\mathrm{E}=\text{BlockDiag}(\bm{e}_1, \cdots, \bm{e}_{n_c})$. If $d^*=0$ then force closure exists.
+
+where $\mathrm{E}=\text{BlockDiag}(\mathbf{e}_1, \cdots, \mathbf{e}_{n_c})$. If $d^*=0$ then force closure exists.
 
 The polyhedral approximation to the friction cone is exact for the planar case and we can write:
 
