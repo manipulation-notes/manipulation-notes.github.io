@@ -26,8 +26,25 @@ A real-world example of a robotic system grasping objects autonomously is shown 
 </figcaption>
 </figure>
 
-In this section, we will assume all bodies are rigid and that Coulomb friction holds. In the remainder of this 
-section we will develop the grasp matrix, a fundamental tool in analyzing grasp quality, 
+In this section, we make the following assumptions:
+
+- **All bodies are rigid:** This significantly simplifies the object and robot representations
+  allowing us to use finite (and relatively small) configuration spaces. We also get well-defined
+  and relatively simple mappings between contact forces and object wrenches as well as simplified
+  frictional interactions. Note that the object will never deform, no matter how hard we grasp it.
+- **Static:** We will only consider objects that are static. This means we are given a snapshot of a
+  grasp and our goal is to evaluate it. We are not worried about how the grasp was achieved, only what
+  would happen given the current configuration -- i.e., is the current grasp stable.
+- **Coulomb Friction:** A very reasonable approximation to the frictional interaction between the robot
+  and object.
+- **Known Geometry:** We're going to assume that we a have access to precise object and robot poses as
+  well as known object and robot geometry.
+- **Infinite Squeeze Force:** We're going to assume that the robot can apply as much torques as necessary
+  with its joints. This assumption is more of a technicality because it is conceivable that the external
+  force attempting to break the grasp is also infinite. In practice, all forces are finite and our analysis
+  will hold assuming the actuators are strong enough.
+
+In the remainder of this section we will develop the grasp matrix, a fundamental tool in analyzing grasp quality, 
 and draw connections to the contact Jacobian we have studied previously. We will then use the grasp matrix 
 to evaluate form and force closures of grasps to evaluate the stability of grasps. These properties are central 
 to the task of planning for and controlling grasps and we will touch on these in subsequent chapters. 
@@ -262,7 +279,15 @@ freedom object and 4 are required for the planar case. Fig. 4 shows some example
 
 
 Geometrically, we can describe form closure using the composite friction cones we discussed in the 
-previous sections. This idea is illustrated in Fig. 5.
+previous sections. This idea is illustrated in Fig. 5. The top left panel shows the effect of having a frictional
+contact with a single finger. Notice the cone of forces the finger can apply. The bottom left panel is the same finger
+in the same location but with no friction. Notice that the set of forces it can apply is now just along a line and
+much more limited. Top right shows how the introduction of another finger (even though it is frictionless) significantly
+increases the set of wrenches we can apply to the object. The bottom right panel shows how with the introduction of
+two more well-placed fingers, we now have a wrench cone that spans the entire wrench space, resulting in a stable grasp.
+Note that the forces due to the fingers can only push, thus we need to have a positive span of the wrench space and that's
+why we need 4 contacts. With 3 contacts, it is possible to have a span of the object wrench space, but this span would require
+negative contact forces which implies the contact pulls, which we are not allowing.
 
 <figure>
 <p align="center">
@@ -559,7 +584,7 @@ $$
 where: 
 
 $$
-\mathrm{S}_i = [\mathbf{s}_{i1} \cdots \mathbf{s}_{in_g}]
+\mathrm{S}_i = [\mathbf{s}_{i,1} \cdots \mathbf{s}_{i,n_g}]
 $$
 
 and $\mathbf{p}_i$ is a vector of non-negative generator weights. Let's write the 
@@ -596,7 +621,11 @@ $$
 where $b$ is a characteristic length used to unify the units and $v_i$ is the torsional friction coefficient.
 
 This polyhedral approximation to the friction cone allows us to efficiently represent 
-the friction cone as a set of linear inequalities:
+the friction cone as a set of linear inequalities. To see this, we first note that adjacent
+generators span the faces of the polyhedral. Thus, by taking their cross-products, we get
+the surface normals to each face. By computing the dot product of the surface normals with the frictional
+force, we can check whether the force is in the interior or exterior of the cone. To formalize this idea,
+we can write:
 
 $$
 \begin{align*}
