@@ -242,17 +242,22 @@ a principle approach for planar pushing using the notion of \textit{motion cones
 which \citet{lynch1992manipulation} applied to the ellipsoidal approximation of the LS. 
 Here, we follow this approach:
 
-_Step 1:_ Denote the point of contact in the object frame as $\mathbf{x}_c = (x_c, y_c)$, 
-the robot pusher velocity as $\mathbf{v}_p = (v_{p,x}, v_{p,y})$, 
-and the object velocity at the point as $\mathbf{v}_o = (v_{o,x}, v_{o,y})$ -- 
-illustrated in Fig.~\ref{fig:chap1:single-finger}.
+_Step 1:_ Denote:
+- the point of contact in the object frame as $\mathbf{x}_c = (x_c, y_c)$,
+- the robot pusher velocity as $\mathbf{v}_p = (v_{p,x}, v_{p,y})$,
+- the object velocity at the point as $\mathbf{v}_o = (v_{o,x}, v_{o,y})$
+  
+See Fig.~\ref{fig:chap1:single-finger} for a reference.
 
 _Step 2:_ Compute the unit velocities $\hat{\mathbf{v}}_l = (v_{l,x},v_{l,y},v_{l,\omega})$ 
 and $\hat{\mathbf{v}}_r= (v_{r,x},v_{r,y},v_{r,\omega})$ resulting from forces at the 
-left and right extremes of the friction cone. The corresponding velocities at the contact 
-point are $\hat{\mathbf{v}}_{c,l} = (v_{l,x} - y_c v_{l,\omega}, v_{l,y} + x_c v_{l,\omega})$ 
-and $\hat{\mathbf{v}}_{c,r} = (v_{r,x} - y_c v_{r,\omega}, v_{r,y} + x_c v_{r,\omega})$. These 
-two vectors define the \textit{motion cone} \citet{Mason-pushing}. Any force applied at the point 
+left and right extremes of the friction cone. 
+
+The corresponding velocities at the contact point are 
+$\hat{\mathbf{v}}_{c,l} = (v_{l,x} - y_c v_{l,\omega}, v_{l,y} + x_c v_{l,\omega})$ 
+and $\hat{\mathbf{v}}_{c,r} = (v_{r,x} - y_c v_{r,\omega}, v_{r,y} + x_c v_{r,\omega})$. 
+
+These two vectors define the \textit{motion cone} \citet{Mason-pushing}. Any force applied at the point 
 of contact within the friction cone results in a velocity that is within the motion cone, i.e. it 
 can be written as the positive sum of $\hat{\mathbf{v}}_{c,r}$ and $\hat{\mathbf{v}}_{c,l}$.
 
