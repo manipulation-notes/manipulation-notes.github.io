@@ -249,6 +249,13 @@ _Step 1:_ Denote:
   
 See Fig.~\ref{fig:chap1:single-finger} for a reference.
 
+**_Testing HTML_**
+<p>
+  Step 2: Compute the unit velocities $\hat{\mathbf{v}}_l = (v_{l,x},v_{l,y},v_{l,\omega})$ 
+and $\hat{\mathbf{v}}_r= (v_{r,x},v_{r,y},v_{r,\omega})$ resulting from forces at the 
+left and right extremes of the friction cone. 
+</p>
+
 _Step 2:_ Compute the unit velocities $\hat{\mathbf{v}}_l = (v_{l,x},v_{l,y},v_{l,\omega})$ 
 and $\hat{\mathbf{v}}_r= (v_{r,x},v_{r,y},v_{r,\omega})$ resulting from forces at the 
 left and right extremes of the friction cone. 
