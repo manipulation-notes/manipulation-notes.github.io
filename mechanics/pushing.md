@@ -41,7 +41,7 @@ Recall from the previous session that the dynamic equations of motion can be wri
 
 $$
 \begin{align*}
-    \mathbf{M}(\mathrm{q})\dot{\mathrm{v}} + \mathrm{c}(\mathrm{q}, \mathrm{v}) + \mathrm{g}(\mathrm{q}) = \mathrm{f}_{e} + \mathrm{f}_c
+    \mathrm{M}(\mathbf{q})\dot{\mathbf{v}} + \mathbf{c}(\mathbf{q}, \mathbf{v}) + \mathbf{g}(\mathbf{q}) = \mathbf{f}_{e} + \mathbf{f}_c
 \end{align*}
 $$
 
@@ -50,7 +50,7 @@ quasi-static assumption we made simplify this expression to:
 
 $$
 \begin{align*}
-    \dot{\mathrm{q}} + \mathrm{g}(\mathrm{q}) = \mathrm{f}_{e} + \mathrm{f}_c
+    \dot{\mathbf{q}} + \mathbf{g}(\mathbf{q}) = \mathbf{f}_{e} + \mathbf{f}_c
 \end{align*}
 $$
 
@@ -117,24 +117,24 @@ a patch contact. We may write this sum as:
 
 $$
 \begin{align*}
-    \mathrm{f}_c & = \int_{S} \frac{\mathrm{v}(\mathrm{x})}{|\mathrm{v}(\mathrm{x}))|} \; \mu p \;  d\mathrm{x} = \int_{S} \hat{\mathrm{v}}(\mathrm{x}) \; \mu p \;  dA \\
-    \mathrm{\tau}_c & = \int_{S} \mathrm{x} \times \frac{\mathrm{v}(\mathrm{x})}{|\mathrm{v}(\mathrm{x}))|} \; \mu p \;  d\mathrm{x} = \int_{S} \mathrm{x} \times \hat{\mathrm{v}}(\mathrm{x}) \; \mu p \;  dA
+    \mathbf{f}_c & = \int_{S} \frac{\mathbf{v}(\mathbf{x})}{|\mathbf{v}(\mathbf{x}))|} \; \mu p \;  d\mathbf{x} = \int_{S} \hat{\mathbf{v}}(\mathbf{x}) \; \mu p \;  dA \\
+    \mathbf{\tau}_c & = \int_{S} \mathbf{x} \times \frac{\mathbf{v}(\mathbf{x})}{|\mathbf{v}(\mathbf{x}))|} \; \mu p \;  d\mathbf{x} = \int_{S} \mathbf{x} \times \hat{\mathbf{v}}(\mathbf{x}) \; \mu p \;  dA
 \end{align*}
 $$
 
-where $\mathrm{v}$ denotes the velocity at point $\mathrm{x}$ on the support surface, $\mu$ is 
-the coefficient of friction, and $p$ is the pressure at point $\mathrm{x}$ (here a constant 
-because of our uniform pressure distribution assumption). We can calculate $\mathrm{v}(\mathrm{x})$ 
+where $\mathbf{v}$ denotes the velocity at point $\mathbf{x}$ on the support surface, $\mu$ is 
+the coefficient of friction, and $p$ is the pressure at point $\mathbf{x}$ (here a constant 
+because of our uniform pressure distribution assumption). We can calculate $\mathbf{v}(\mathbf{x})$ 
 using rigid-body mechanics as:
 
 $$
 \begin{align*}
-    \mathrm{v}(\mathrm{x}) = \begin{bmatrix} v_x - \omega y \\ v_y + \omega x \\ 0 \end{bmatrix}
+    \mathbf{v}(\mathbf{x}) = \begin{bmatrix} v_x - \omega y \\ v_y + \omega x \\ 0 \end{bmatrix}
 \end{align*}
 $$
 
-where $\dot{\mathrm{q}} = \mathrm{v} = (v_x, v_y, \omega)^T$ is the velocity vector of the 
-object and $\mathrm{x} = (x,y,0)^T$ is the coordinate of every point on the surface relative to 
+where $\dot{\mathbf{q}} = \mathbf{v} = (v_x, v_y, \omega)^T$ is the velocity vector of the 
+object and $\mathbf{x} = (x,y,0)^T$ is the coordinate of every point on the surface relative to 
 the center of mass. This function defines the Limit Surface and maps the unit velocity vector 
 of the object to the reaction force from the support. Under the relatively easy to satisfy 
 assumption that the pressure at every point on the support surface is finite, this function 
@@ -142,8 +142,8 @@ is smooth and strictly convex (one-to-one). If we solve for every unit velocity 
 the object, we have a surface (the Limit Surface) defined in force-torque space (wrench space) 
 that maps every possible motion of the object to its corresponding frictional reaction force. 
 Fig.~\ref{fig:chap1:ls} illustrates an ellipsoidal LS. \citet{goyal1991planar} show that the unit
-vector $\hat{\mathrm{v}}$ is orthogonal to the Limit Surface. Intuitively, we are integrating 
-over a gradient field $\hat{\mathrm{v}}$ to derive the surface, so the field must be orthogonal 
+vector $\hat{\mathbf{v}}$ is orthogonal to the Limit Surface. Intuitively, we are integrating 
+over a gradient field $\hat{\mathbf{v}}$ to derive the surface, so the field must be orthogonal 
 to the surface at all points.
 
 <figure>
@@ -167,10 +167,20 @@ challenge \citet{howe1996practical,lynch1992manipulation} proposed an ellipsoida
 approximation to the surface that can easily be constructed. \citet{lynch1992manipulation} 
 proposes the following three steps to construct the ellipsoidal approximation of the LS:
 
-- Calculate the maximum torsional friction that the surface can resist using $\tau_{max} = \mu \; p \int_{S} |x|   dA$.
-- Calculate the maximum linear frictional force that the surface can resist using: $f_{max} = \mu |\mathrm{f}_n|$ 
-where $|\mathrm{f}_n|$ denotes the normal force.
-- he approximate ellipsoidal surface is given by:
+- Calculate the maximum torsional friction that the surface can resist using
+  
+$$
+\tau_{max} = \mu \; p \int_{S} |x|   dA
+$$
+
+- Calculate the maximum linear frictional force that the surface can resist using:
+  
+$$
+f_{max} = \mu |\mathbf{f}_n|
+$$
+
+where $|\mathbf{f}_n|$ denotes the normal force.
+- Approximate the ellipsoidal surface is given by:
 
 $$
  \left( \frac{f_x}{f_{max}}\right)^2 + \left( \frac{f_y}{f_{max}}\right)^2 + \left( \frac{\tau}{\tau_{max}}\right)^2 = 1
@@ -191,16 +201,16 @@ scenarios: first, The robot is able to impart forces to the object directly (for
 and second, the robot is position controlled and can only import displacements. In both scenarios, 
 we assume that the robot moves slowly enough such that the quasi-static assumption holds (no accelerations).
 
-**Force-control:** Given an external force $\mathrm{f}_e = (f_x, f_y)$ applied at contact point $\mathrm{x}_c = (x, y)$:
-
 ---
+
+**Force-control:** Given an external force $\mathbf{f}_e = (f_x, f_y)$ applied at contact point $\mathbf{x}_c = (x, y)$:
 
 _Step 1:_ Compute the effect of the external force at the COM. We can use the contact Jacobian 
 we derived in previous sections to map the force at the point of contact between the robot and object:
 
 $$
 \begin{align*}
-   \mathrm{f}_{e,c} = \mathbf{J}_c \mathrm{f}_e
+   \mathbf{f}_{e,c} = \mathbf{J}_c \mathbf{f}_e
 \end{align*}
 $$
 
@@ -208,16 +218,16 @@ _Step 2:_ This force is equal and opposite to the reaction force applied by the 
 
 $$
 \begin{align*}
-    \mathrm{f}_{e,c} = - \mathrm{f}_{c}
+    \mathbf{f}_{e,c} = - \mathbf{f}_{c}
 \end{align*}
 $$
 So we find the corresponding point on the limit surface.
 
-_Step 3:_ Compute the normal to the LS, denoted as $\hat{\mathrm{v}}$, and update the configuration of the object according to:
+_Step 3:_ Compute the normal to the LS, denoted as $\hat{\mathbf{v}}$, and update the configuration of the object according to:
 
 $$
 \begin{align*}
-    \mathrm{q}_{t+1} = \mathrm{q}_{t} + h \hat{\mathrm{v}}
+    \mathbf{q}_{t+1} = \mathbf{q}_{t} + h \hat{\mathbf{v}}
 \end{align*}
 $$
 
@@ -232,27 +242,26 @@ a principle approach for planar pushing using the notion of \textit{motion cones
 which \citet{lynch1992manipulation} applied to the ellipsoidal approximation of the LS. 
 Here, we follow this approach:
 
---- 
-_Step 1:_ Denote the point of contact in the object frame as $\mathrm{x}_c = (x_c, y_c)$, 
-the robot pusher velocity as $\mathrm{v}_p = (v_{p,x}, v_{p,y})$, 
-and the object velocity at the point as $\mathrm{v}_o = (v_{o,x}, v_{o,y})$ -- 
+_Step 1:_ Denote the point of contact in the object frame as $\mathbf{x}_c = (x_c, y_c)$, 
+the robot pusher velocity as $\mathbf{v}_p = (v_{p,x}, v_{p,y})$, 
+and the object velocity at the point as $\mathbf{v}_o = (v_{o,x}, v_{o,y})$ -- 
 illustrated in Fig.~\ref{fig:chap1:single-finger}.
 
-_Step 2:_ Compute the unit velocities $\hat{\mathrm{v}}_l = (v_{l,x},v_{l,y},v_{l,\omega})$ 
-and $\hat{\mathrm{v}}_r= (v_{r,x},v_{r,y},v_{r,\omega})$ resulting from forces at the 
+_Step 2:_ Compute the unit velocities $\hat{\mathbf{v}}_l = (v_{l,x},v_{l,y},v_{l,\omega})$ 
+and $\hat{\mathbf{v}}_r= (v_{r,x},v_{r,y},v_{r,\omega})$ resulting from forces at the 
 left and right extremes of the friction cone. The corresponding velocities at the contact 
-point are $\hat{\mathrm{v}}_{c,l} = (v_{l,x} - y_c v_{l,\omega}, v_{l,y} + x_c v_{l,\omega})$ 
-and $\hat{\mathrm{v}}_{c,r} = (v_{r,x} - y_c v_{r,\omega}, v_{r,y} + x_c v_{r,\omega})$. These 
+point are $\hat{\mathbf{v}}_{c,l} = (v_{l,x} - y_c v_{l,\omega}, v_{l,y} + x_c v_{l,\omega})$ 
+and $\hat{\mathbf{v}}_{c,r} = (v_{r,x} - y_c v_{r,\omega}, v_{r,y} + x_c v_{r,\omega})$. These 
 two vectors define the \textit{motion cone} \citet{Mason-pushing}. Any force applied at the point 
 of contact within the friction cone results in a velocity that is within the motion cone, i.e. it 
-can be written as the positive sum of $\hat{\mathrm{v}}_{c,r}$ and $\hat{\mathrm{v}}_{c,l}$.
+can be written as the positive sum of $\hat{\mathbf{v}}_{c,r}$ and $\hat{\mathbf{v}}_{c,l}$.
 
 _Step 3:_ If the pusher velocity is within the motion cone, then the contact is sticking 
-and $\mathrm{v}_o = \mathrm{v}_p$. If the pusher velocity is to the left (right) of the motion cone, 
+and $\mathbf{v}_o = \mathbf{v}_p$. If the pusher velocity is to the left (right) of the motion cone, 
 then the pusher slides on the object to the left (right).
 
-_Step 4:_ If the contact is sticking, we know that $\mathrm{v}_o = \mathrm{v}_p$. Since the 
-applied force must pass through the point of contact and $\mathrm{\tau}=\mathrm{x}_c \times \mathrm{f}_c$, we may write:
+_Step 4:_ If the contact is sticking, we know that $\mathbf{v}_o = \mathbf{v}_p$. Since the 
+applied force must pass through the point of contact and $\mathbf{\tau}=\mathbf{x}_c \times \mathbf{f}_c$, we may write:
 
 $$
 \begin{align*}
@@ -262,7 +271,7 @@ $$
 \end{align*}
 $$
 
-Given that $\mathrm{f}$ is parallel to $\mathrm{v}$, we may write:
+Given that $\mathbf{f}$ is parallel to $\mathbf{v}$, we may write:
 
 $$
 \begin{align*}
@@ -281,13 +290,13 @@ $$
 \end{align*}
 $$
 
-_Step 5_: If the contact is sliding, i.e. when $\mathrm{v}_p$ is outside the motion cone, 
-then the contact is slipping and $\mathrm{v}_o$ lies on the boundary of the motion cone. 
-The slipping velocity $\mathrm{v}_s$ (in the plane of contact) satisfies:
+_Step 5_: If the contact is sliding, i.e. when $\mathbf{v}_p$ is outside the motion cone, 
+then the contact is slipping and $\mathbf{v}_o$ lies on the boundary of the motion cone. 
+The slipping velocity $\mathbf{v}_s$ (in the plane of contact) satisfies:
 
 $$
 \begin{align*}
-    \mathrm{v}_o + \mathrm{v}_s = \mathrm{v}_p
+    \mathbf{v}_o + \mathbf{v}_s = \mathbf{v}_p
 \end{align*}
 $$
 
@@ -297,7 +306,7 @@ the sliding is to the right (same process holds for the left):
 
 $$
 \begin{align*}
-    \mathrm{v}_o = \frac{\mathrm{v}^T_p \hat{\mathrm{n}}}{\mathrm{v}^T_r \hat{\mathrm{n}}} \mathrm{v}_r = \kappa \mathrm{v}_r
+    \mathbf{v}_o = \frac{\mathbf{v}^T_p \hat{\mathbf{n}}}{\mathbf{v}^T_r \hat{\mathbf{n}}} \mathbf{v}_r = \kappa \mathbf{v}_r
 \end{align*}
 $$
 
@@ -315,7 +324,7 @@ _Step 6:_ Update the configuration of the object according to:
 
 $$
 \begin{align*}
-    \mathrm{q}_{t+1} = \mathrm{q}_{t} + h \mathrm{v}_o
+    \mathbf{q}_{t+1} = \mathbf{q}_{t} + h \mathbf{v}_o
 \end{align*}
 $$
 
@@ -355,20 +364,22 @@ that the robot can induce. This intersection is a cone. In the interior of this 
 the interaction between the robot and the object is sticking, and sliding when on the 
 boundary of the cone. 
 
-Note that $\hat{\mathrm{v}}_r$ and $\hat{\mathrm{v}}_l$ are the unit vectors of object 
+Note that $\hat{\mathbf{v}}_r$ and $\hat{\mathbf{v}}_l$ are the unit vectors of object 
 motion in the object frame. We can project them to the contact point using the contact Jacobian:
 
 $$
 \begin{align*}
-    \hat{\mathrm{v}}_{c,r} = \mathbf{J}_c\hat{\mathrm{v}}_r \\ 
-    \hat{\mathrm{v}}_{c,l} = \mathbf{J}_c\hat{\mathrm{v}}_l
+    \hat{\mathbf{v}}_{c,r} = \mathbf{J}_c\hat{\mathbf{v}}_r \\ 
+    \hat{\mathbf{v}}_{c,l} = \mathbf{J}_c\hat{\mathbf{v}}_l
 \end{align*}
 $$
 
-If the pusher velocity is in the interior of the cone generated by $\hat{\mathrm{v}}_{c,r}$ 
-and $\hat{\mathrm{v}}_{c,l}$, then the interaction is sticking, else it is sliding. If the 
-interaction is sticking then $\mathrm{v}_o = \mathrm{v}_p$. If the interaction is sliding to 
-the left (right), then $\mathrm{v}_o = \hat{\mathrm{v}}_l$ ($\hat{\mathrm{v}}_r$).
+If the pusher velocity is in the interior of the cone generated by $\hat{\mathbf{v}}_{c,r}$ 
+and $\hat{\mathbf{v}}_{c,l}$, then the interaction is sticking, else it is sliding. 
+
+If the 
+interaction is sticking then $\mathbf{v}_o = \mathbf{v}_p$. If the interaction is sliding to 
+the left (right), then $\mathbf{v}_o = \hat{\mathbf{v}}_l$ ($\hat{\mathbf{v}}_r$).
 
 ### Stable Pushing
 
