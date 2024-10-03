@@ -27,6 +27,7 @@ math: true
         - Grasp Matrix
         - Form Closure
         - Force Closure
+    3. [Planar Pushing](mechanics/pushing.md)
 2. Planning and Controls for Rigid-Body Interaction
     1. [Introduction](planning-controls/preliminaries.md)
     2. [Dynamical Motion Primitives](planning-controls/dmps.md)
