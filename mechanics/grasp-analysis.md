@@ -726,3 +726,18 @@ $$
     \mathrm{F}_i = \frac{1}{\sqrt{1+\mu^2_i}} \begin{bmatrix} \mu_i & 1 \\ \mu_i & -1 \end{bmatrix}
 \end{align*}
 $$
+
+## Antipodal Grasps and Parallel Jaw Grippers
+
+Perhaps the most commonly used grippers in industry are simple two fingered parallel jaw 
+grippers. Fig.~\ref{fig:yummy-push} shows one such example (the ABB Yumi end-effector). The popularity 
+of this design is due to its simplicity in design (leading to highly reliable mechanisms that can perform 
+hundreds of thousands of grasps if treated well) and control (a simple single degree of freedom linear stage). 
+
+Given the popularity of this type of gripper, here we'll discuss a unique form of grasp analysis that is 
+particularly well-suited for parallel jaw grippers: Antipodal grasps. A grasp is an ``antipodal" grasp 
+iff the line connecting the contact points lies inside both friction cones. Antipodal grasps are a special 
+type of force closure that are particularly amenable to parallel jaw grippers. We do note that it is impossible 
+to get antipodal form closure for hard fingers unless there are more than two points of contact. In industrial applications, 
+it is common to look for antipodal grasp affordances from visual feedback. We will investigate this approach more in 
+our Perception for Manipulation section.
