@@ -30,7 +30,7 @@ value (in the 2-norm sense) by solving the following optimization program:
 $$
 \begin{align}
     \begin{aligned}
-    \min_{\mathbf w \in \real^3, \mathbf f_c \in \real ^2} \quad & \frac{1}{2} \mathbf w^{T} \mathbf Q_w \mathbf w + \frac{1}{2} \mathbf f^T_c \mathbf Q_f \mathbf f_c &  \\
+    \min_{\mathbf w \in \mathbb{R}^3, \mathbf f_c \in \mathbb{R}^2} \quad & \frac{1}{2} \mathbf w^{T} \mathbf Q_w \mathbf w + \frac{1}{2} \mathbf f^T_c \mathbf Q_f \mathbf f_c &  \\
     \textrm{s.t.} \quad &  \mathbf J_c \mathbf f_c + \mathbf w + m\mathbf g= 0 & \text{Static Equilibrium} \\
     &0 \leq f_{c,n} & \text{Contacts can only push} \\
     &0 \leq \mu f_{c,n} - f_{c,t} \quad \quad  & \text{Right Friction Cone} \\
@@ -40,7 +40,7 @@ $$
 $$
 
 where $\mathbf Q_w$ and $\mathbf Q_f$ are both symmetric positive definite matrices 
-of appropriate size, $\mathbf f_c = (f_{c,t}, f_{c,n})$, $\mathbf g \in \real^3$ is the 
+of appropriate size, $\mathbf f_c = (f_{c,t}, f_{c,n})$, $\mathbf g \in \mathbb{R}^3$ is the 
 gravitational acceleration (a linear acceleration applied to the center of mass with 
 no torsional contribution), and $\mathbf J_c$ is the configuration dependent $3\times 2$ 
 Jacobian matrix. The Jacobian is a known and constant matrix given the object configuration. 
@@ -62,7 +62,7 @@ and writing:
 $$
 \begin{align}
     \begin{aligned}
-        \min_{\mathbf x \in \real^5} \quad & \frac{1}{2} \mathbf x^{T} \mathbf Q \mathbf x &  \\
+        \min_{\mathbf x \in \mathbb{R}^5} \quad & \frac{1}{2} \mathbf x^{T} \mathbf Q \mathbf x &  \\
     \textrm{s.t.} \quad &  \mathbf A \mathbf x = \mathbf b & \\
     & \mathbf C \mathbf x \leq \mathbf d = \mathbf 0  &
     \end{aligned}
@@ -176,9 +176,9 @@ where **Obj** is the value of the objective function at the optimal point.
 ### Balancing in 3D
 
 When moving from 2D to 3D, we extend both the wrench and gravity vectors. 
-Specifically for the wrench, $\mathbf w \in \real^3 \; \rightarrow \; \mathbf w \in \real^6$ where 
+Specifically for the wrench, $\mathbf w \in \mathbb{R}^3 \; \rightarrow \; \mathbf w \in \mathbb{R}^6$ where 
 we add one linear and 2 torsional components. 
-Similarly, $\mathbf g \in \real^3 \; \rightarrow \; \mathbf g \in \real^6$ where the 
+Similarly, $\mathbf g \in \mathbb{R}^3 \; \rightarrow \; \mathbf g \in \mathbb{R}^6$ where the 
 last 3 entries (the moments) will be zero. With these changes, the static equilibrium 
 constraints are now written in 3D resulting in 6 equality constraints. **The major change that 
 significantly complicates the transition from 2D to 3D is that the frictional force constraint.**
@@ -187,7 +187,7 @@ The general friction cone in 3D is described by:
 
 $$
 \begin{align}
-    \mathcal{FC} = \{ (f_n, f_t, f_o) \in \real^3 \; |\; \sqrt{f_t^2 + f_o^2} \leq \mu f_n \; , \; f_n \geq 0   \}
+    \mathcal{FC} = \{ (f_n, f_t, f_o) \in \mathbb{R}^3 \; |\; \sqrt{f_t^2 + f_o^2} \leq \mu f_n \; , \; f_n \geq 0   \}
 \end{align}
 $$
 
@@ -197,7 +197,7 @@ then we can write the general friction cone as:
 
 $$
 \begin{align}
-    \mathcal{FC} = \{ (\mathbf x, t), \; \mathbf x \in \real^2, \; t \geq 0 \in \real  \; |\; \lVert \mathbf x \rVert_2 \leq t   \}
+    \mathcal{FC} = \{ (\mathbf x, t), \; \mathbf x \in \mathbb{R}^2, \; t \geq 0 \in \mathbb{R}  \; |\; \lVert \mathbf x \rVert_2 \leq t   \}
 \end{align}
 $$
 
@@ -213,7 +213,7 @@ form that will be useful for optimization:
 
 $$
 \begin{align}
-    \mathcal{FC} = \{ (\mathbf x, t), \; \mathbf x \in \real^2, \; t \geq 0 \in \real  \; |\; \lVert \mathbf x \rVert_2 \leq t   \} \equiv \lVert \mathbf A \mathbf x + \mathbf b \rVert_2 \leq \mathbf c^T \mathbf x + d
+    \mathcal{FC} = \{ (\mathbf x, t), \; \mathbf x \in \mathbb{R}^2, \; t \geq 0 \in \mathbb{R}  \; |\; \lVert \mathbf x \rVert_2 \leq t   \} \equiv \lVert \mathbf A \mathbf x + \mathbf b \rVert_2 \leq \mathbf c^T \mathbf x + d
 \end{align}
 $$
 
@@ -222,7 +222,7 @@ where $\mathbf x = \mathbf f_c = (f_t, f_o, f_n)$, $\mathbf A = \mathbf{I}_n$, $
 $$
 \begin{align}
     \begin{aligned}
-    \min_{\mathbf w \in \real^6, \mathbf f_c \in \real ^3} \quad & \frac{1}{2} \mathbf w^{T} \mathbf Q_w \mathbf w + \frac{1}{2} \mathbf f^T_c \mathbf Q_f \mathbf f_c &  \\
+    \min_{\mathbf w \in \mathbb{R}^6, \mathbf f_c \in \mathbb{R}^3} \quad & \frac{1}{2} \mathbf w^{T} \mathbf Q_w \mathbf w + \frac{1}{2} \mathbf f^T_c \mathbf Q_f \mathbf f_c &  \\
     \textrm{s.t.} \quad &  \mathbf J_c \mathbf f_c + \mathbf w + m\mathbf g= 0 & \text{Static Equilibrium} \\
     &0 \leq f_{c,n} & \text{Contacts can only push} \\
     &\lVert \mathbf A \mathbf f_c + \mathbf b \rVert_2 \leq \mathbf c^T \mathbf f_c + d  & \text{Friction Cone Constraint} \\
@@ -241,7 +241,7 @@ holds for the 3D case):
 $$
 \begin{align}
     \begin{aligned}
-    \min_{\mathbf w \in \real^3, \mathbf f_c \in \real ^2} \quad & \frac{1}{2} \mathbf w^{T} \mathbf Q_w \mathbf w + \frac{1}{2} \mathbf f^T_c \mathbf Q_f \mathbf f_c &  \\
+    \min_{\mathbf w \in \mathbb{R}^3, \mathbf f_c \in \mathbb{R}^2} \quad & \frac{1}{2} \mathbf w^{T} \mathbf Q_w \mathbf w + \frac{1}{2} \mathbf f^T_c \mathbf Q_f \mathbf f_c &  \\
     \textrm{s.t.} \quad &  \mathbf J_c \mathbf f_c + \mathbf w + m\mathbf g= 0 & \text{Static Equilibrium} \\
     &0 \leq f_{c,n} & \text{Contacts can only push} \\
     &0 \leq \mu f_{c,n} - f_{c,t} \quad \quad  & \text{Right Friction Cone} \\
@@ -288,7 +288,7 @@ optimization becomes:
 $$
 \begin{align}
     \begin{aligned}
-    \min_{\mathbf w \in \real^3} \quad & \frac{1}{2} \mathbf w^{T} \left( \mathbf Q_w + \mathbf J_c (\mathbf J_c^T \mathbf J_c)^{-T} \mathbf Q_f (\mathbf J_c^T \mathbf J_c)^{-1} \mathbf J_c^T \right) \mathbf w + \frac{1}{2} m\mathbf g^T \mathbf Q_f m\mathbf g &  \\
+    \min_{\mathbf w \in \mathbb{R}^3} \quad & \frac{1}{2} \mathbf w^{T} \left( \mathbf Q_w + \mathbf J_c (\mathbf J_c^T \mathbf J_c)^{-T} \mathbf Q_f (\mathbf J_c^T \mathbf J_c)^{-1} \mathbf J_c^T \right) \mathbf w + \frac{1}{2} m\mathbf g^T \mathbf Q_f m\mathbf g &  \\
     \textrm{s.t.} \quad &  \begin{bmatrix} 0 & 1 \\ -1 & \mu \\ 1 & \mu \end{bmatrix} (\mathbf J_c^T \mathbf J_c)^{-1} \mathbf J_c^T \mathbf w  \leq -  m \mathbf g & \text{3 Linear Inequalities} 
 \end{aligned}
 \end{align}
@@ -383,7 +383,7 @@ the cost that captures the penalty for deviation from the desired trajectory:
 $$
 \begin{align}
     \begin{aligned}
-    \min_{\mathbf w_t \in \real^3, \mathbf f_{c,t} \in \real ^2} \quad & \sum_{t=1}^{N} \; \frac{1}{2} \mathbf w_t^{T} \mathbf Q_w \mathbf w_t + \frac{1}{2} \mathbf f^T_{c,t} \mathbf Q_f \mathbf f_{c,t} + \frac{1}{2} (\mathbf q_t^d - \mathbf q_t)^T (\mathbf q_t^d - \mathbf q_t) &  \\
+    \min_{\mathbf w_t \in \mathbb{R}^3, \mathbf f_{c,t} \in \mathbb{R}^2} \quad & \sum_{t=1}^{N} \; \frac{1}{2} \mathbf w_t^{T} \mathbf Q_w \mathbf w_t + \frac{1}{2} \mathbf f^T_{c,t} \mathbf Q_f \mathbf f_{c,t} + \frac{1}{2} (\mathbf q_t^d - \mathbf q_t)^T (\mathbf q_t^d - \mathbf q_t) &  \\
     \textrm{s.t.} \quad &  h^2 \mathbf M^{-1}(\mathbf J_c(\mathbf q_t) \mathbf f_{c,t} + \mathbf w_t + m\mathbf g) + \mathbf{q}_{t-1} = \mathbf{q}_{t} & \text{Quasi-dynamic Motion} \\
     &0 \leq f_{c,n} & \text{Contacts can only push} \\
     &0 \leq \mu f_{c,n} - f_{c,t} \quad \quad  & \text{Right Friction Cone} \\
